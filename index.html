@@ -359,10 +359,8 @@ const parseCurl = (s, clean) => {
 
             if (headerKey === 'Cookie') {
               out.credentials = 'include'
-            } else {
-              out.headers[headerKey] = arg.slice(delimIndex + 1)
-                .trim()
             }
+            out.headers[headerKey] = arg.slice(delimIndex + 1).trim()
             state = ''
             break
           case 'user-agent':
