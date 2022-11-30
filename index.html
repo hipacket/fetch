@@ -432,6 +432,7 @@ const parseCurl = (s, clean) => {
     delete out.headers.Scheme
     delete out.headers.Method
     delete out.headers.Path
+    delete out.headers.Cookie
     // automaticaly added
     delete out.headers['Accept-Language']
     delete out.headers['User-Agent' ]
