@@ -267,7 +267,7 @@ const addArg = (currentValue, arg) => currentValue
   ? currentValue +'&'+ arg
   : arg
 
-const capitalize = str => str[0].toUpperCase() + str.slice(1).toLowerCase()
+const capitalize = str => str.length ? str[0].toUpperCase() + str.slice(1).toLowerCase(): ''
 const forbidden = [
   'Accept-Charset',
   'Accept-Encoding',
