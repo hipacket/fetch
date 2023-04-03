@@ -490,12 +490,15 @@ const formatOpts = (indent, opts) => '{\n'+ Object.keys(opts).sort(noCase)
     const legalKey = matchLegalChars.test(key)
       ? _class.key(key)
       : _class.key.text(key)
-
+    
     const value = isObj(rawVal)
       ? formatOpts(indent + spacer, rawVal)
       : _class.value.text(rawVal.replace(/[&<>'"]/g, e => `${(e === '"')?'&#92':''}&#${e.charCodeAt(0)};`))
-
-    return `${indent}${legalKey}: ${key === 'body'?rawVal:value}`
+    var bodyVal = rawVal
+    try {
+      bodyVal = JSON.stringify(JSON.parse(rawVal), undefined, 2)
+    } catch(e) {}
+    return `${indent}${legalKey}: ${key === 'body'?bodyVal:value}`
   }).filter(Boolean).join(',\n') + `\n${indent.slice(spacer.length)}}`
 
 const formatFetch = (url, opts) => isNotEmpty(opts)
