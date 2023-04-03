@@ -239,7 +239,7 @@ const split = line => {
   let field = ""
   scan(line, splitReg, ([ raw, word, sq, dq, escape, garbage, seperator ]) => {
     if (garbage !== undefined) throw Error("Unmatched quote")
-    field += word || (sq || dq || escape).replace(/\\(?=.)/, "")
+    field += word || (sq || dq || escape || "").replace(/\\(?=.)/, "")
     if (seperator !== undefined) {
       words.push(field)
       field = ""
