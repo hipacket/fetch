@@ -320,7 +320,7 @@ const parseCurl = (s, clean) => {
         state = 'form-string'
         break
 
-      case arg == '-d' || arg == '--data' || arg == '--data-ascii' || arg == '--data-binary':
+      case arg == '-d' || arg == '--data' || arg == '--data-ascii' || arg == '--data-binary' || arg == '--data-raw':
         state = 'data'
         break
 
@@ -493,7 +493,7 @@ const formatOpts = (indent, opts) => '{\n'+ Object.keys(opts).sort(noCase)
 
     const value = isObj(rawVal)
       ? formatOpts(indent + spacer, rawVal)
-      : _class.value.text(rawVal.replace(/[&<>'"]/g, e => `&#${e.charCodeAt(0)};`))
+      : _class.value.text(rawVal.replace(/[&<>'"]/g, e => `${(e === '"')?'&#92':''}&#${e.charCodeAt(0)};`))
 
     return `${indent}${legalKey}: ${value}`
   }).filter(Boolean).join(',\n') + `\n${indent.slice(spacer.length)}}`
