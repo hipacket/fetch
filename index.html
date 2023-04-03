@@ -496,7 +496,7 @@ const formatOpts = (indent, opts) => '{\n'+ Object.keys(opts).sort(noCase)
       : _class.value.text(rawVal.replace(/[&<>'"]/g, e => `${(e === '"')?'&#92':''}&#${e.charCodeAt(0)};`))
     var bodyVal = rawVal
     try {
-      bodyVal = 'JSON.stringify(' + JSON.stringify(JSON.parse(rawVal), undefined, 2).replace(/}$/g, '\t}') + ')'
+      bodyVal = 'JSON.stringify(' + JSON.stringify(JSON.parse(rawVal), undefined, 2).replace(/\n/g, '\n  ') + ')'
     } catch(e) {}
     return `${indent}${legalKey}: ${key === 'body'?bodyVal:value}`
   }).filter(Boolean).join(',\n') + `\n${indent.slice(spacer.length)}}`
