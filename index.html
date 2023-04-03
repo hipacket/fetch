@@ -502,7 +502,7 @@ const formatOpts = (indent, opts) => '{\n'+ Object.keys(opts).sort(noCase)
         console.log(e)
       }
     }
-    return `${indent}${legalKey}: value}`
+    return `${indent}${legalKey}: ${value}`
   }).filter(Boolean).join(',\n') + `\n${indent.slice(spacer.length)}}`
 
 const formatFetch = (url, opts) => isNotEmpty(opts)
